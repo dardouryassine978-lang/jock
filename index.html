@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enzel w mat5afech</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg,
+        #080808, #21002e, #001c35, #310012);
+    background-size: 400% 400%;
+    animation: backgroundMove 10s ease infinite;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    text-align: center;
+    z-index: 2;
+    padding: 20px;
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 60px);
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px #a100ff;
+    margin-bottom: 35px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #8b00ff; }
+    to { text-shadow: 0 0 30px #ff00a6; }
+}
+
+button {
+    padding: 16px 35px;
+    border: 2px solid white;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #8a00ff, #ff0077);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 25px #a000ff;
+}
+
+button:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 40px #ff0077;
+}
+
+#message {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(25px, 6vw, 48px);
+    font-weight: 900;
+    text-align: center;
+    white-space: nowrap;
+    animation: appear 0.7s ease;
+    z-index: 5;
+}
+
+@keyframes appear {
+    from { opacity: 0; scale: 0.2; }
+    to { opacity: 1; scale: 1; }
+}
+
+.particle {
+    position: absolute;
+    color: white;
+    pointer-events: none;
+    animation: floatUp 5s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    20% { opacity: 0.7; }
+    to {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>Enzel wmat5afech</h1>
+    <button onclick="startShow()">EḌGHT HOUNI 😈</button>
+</div>
+
+<div id="message">yaatek nam 3la 3enk 😂🔥</div>
+
+<script>
+let started = false;
+
+function startShow() {
+    if (started) return;
+    started = true;
+
+    document.getElementById("main").style.display = "none";
+
+    const msg = document.getElementById("message");
+    msg.style.display = "block";
+
+    // تبديل اللون تلقائياً
+    setInterval(() => {
+        const hue = Math.floor(Math.random() * 360);
+        msg.style.color = `hsl(${hue}, 100%, 65%)`;
+        msg.style.textShadow =
+            `0 0 15px hsl(${hue}, 100%, 60%),
+             0 0 40px hsl(${hue}, 100%, 50%)`;
+    }, 350);
+
+    // تحريك العبارة في أماكن مختلفة
+    setInterval(() => {
+        const maxX = Math.max(0, window.innerWidth - msg.offsetWidth);
+        const maxY = Math.max(0, window.innerHeight - msg.offsetHeight);
+
+        msg.style.transition = "left 0.7s, top 0.7s";
+        msg.style.left = Math.random() * maxX + "px";
+        msg.style.top = Math.random() * maxY + "px";
+        msg.style.transform = "none";
+    }, 1000);
+
+    // نجوم متحركة في الخلفية
+    for (let i = 0; i < 50; i++) {
+        const star = document.createElement("div");
+        star.className = "particle";
+        star.textContent = ["✦", "★", "✧", "⚡"][Math.floor(Math.random() * 4)];
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.animationDuration = (3 + Math.random() * 6) + "s";
+        star.style.animationDelay = Math.random() * 5 + "s";
+        star.style.fontSize = (10 + Math.random() * 20) + "px";
+        document.body.appendChild(star);
+    }
+}
+</script>
+
+</body>
+</html>
